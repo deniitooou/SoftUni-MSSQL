@@ -113,9 +113,9 @@ INSERT INTO [BedTypes]
 		
 INSERT INTO [Rooms] 
      VALUES
-	('Single', 'Single Bed', 05.30, 'Occupied', 'Note..'),
-	('Double', 'Double Bed', 05.90, 'Free', 'Note..'),
-	('Studio', 'King Size', 06.00, 'Reserved', 'Note..')
+	('Single', 'Single Bed', 05.30, 'Occupied', 'Note..')
+	,('Double', 'Double Bed', 05.90, 'Free', 'Note..')
+	,('Studio', 'King Size', 06.00, 'Reserved', 'Note..')
 		
 INSERT INTO [Payments] 
      VALUES
