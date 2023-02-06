@@ -1,157 +1,103 @@
-# PROBLEM 1.Create Database
-You now know how to create database using the GUI of the SSMS. 
-Now it’s time to create it using SQL queries. 
-In that task (and the several following it) you will be required to create the database from the previous exercise using only SQL queries. Firstly, just create new database named Minions.
+# PROBLEM 1. One-To-One Relationship
+Create two tables and use appropriate data types.
+Example:
+              [ Persons ]
+PersonID  FirstName   Salary   PassportID
+   1      Roberto  43300.00      102
+   2       Tom     56100.00      103
+   3      Yana     60200.00      101
 
-# PROBLEM 2.Create Tables
-In the newly created database Minions add table Minions (Id, Name, Age). 
-Then add new table Towns (Id, Name). 
-Set Id columns of both tables to be primary key as constraint.
+          [ Passports ]
+PassportID        PassportNumber
+    101            N34FG21B
+    102            K65LO4R7
+    103            ZE657QP2
 
-# PROBLEM 3.Alter Minions Table
-Change the structure of the Minions table to have new column TownId that would be of the same type as the Id column of Towns table. 
-Add new constraint that makes TownId foreign key and references to Id column of Towns table.
+Insert the data from the example above. Alter the Persons table and make PersonID a primary key. Create a foreign key between Persons and Passports by using the PassportID column.
 
-# PROBLEM 4.Insert Records in Both Tables
-Populate both tables with sample records given in the table below.
-Minions Towns
-Id  Name   Age  TownId  Id    Name
-1  Kevin   22     1     1    Sofia
-2   Bob    15     3     2   Plovdiv
-3 Steward  NULL   2     3    Varna
-Use only SQL queries. Insert the Id manually (don’t use identity).
+# PROBLEM 2. One-To-Many Relationship
+Create two tables and use appropriate data types.
+Example
+         [ Models ]
+  ModelID    Name    ManufacturerID
+    101       X1            1
+    102       i6            1
+    103    Model S          2
+    104    Model X          2
+    105    Model 3          2
+    106      Nova           3
+  
+        [Manufacturers]
+ ManufacturerID   Name   EstablishedOn
+       1           BMW     07/03/1916
+       2          Tesla    01/01/2003
+       3           Lada    01/05/1966
 
-# PROBLEM 5.Truncate Table Minions
-Delete all the data from the Minions table using SQL query.
+Insert the data from the example above and add primary keys and foreign keys.
 
-# PROBLEM 6. Drop All Tables
-Delete all tables from the Minions database using SQL query.
+# PROBLEM 3. Many-To-Many Relationship
+Create three tables and use appropriate data types.
+Example
+    [Students]
+ StudentID  Name
+    1       Mila                                      
+    2       Toni
+    3        Ron
+    [Exams]
+ExamID    Name
+101   SpringMVC
+102     Neo4j
+103   Oracle 11g
+[StudentsExams]
+StudentID  ExamID
+1           101
+1           102
+2           101
+3           103
+2           102
+2           103
 
-# PROBLEM 7.Create Table People
-Using SQL query create table People with columns:
-• Id – unique number for every person there will be no more than 231-1 people. (Auto incremented)
-• Name – full name of the person will be no more than 200 Unicode characters. (Not null)
-• Picture – image with size up to 2 MB. (Allow nulls)
-• Height – In meters. Real number precise up to 2 digits after floating point. (Allow nulls)
-• Weight – In kilograms. Real number precise up to 2 digits after floating point. (Allow nulls)
-• Gender – Possible states are m or f. (Not null)
-• Birthdate – (Not null)
-• Biography – detailed biography of the person it can contain max allowed Unicode characters. (Allow nulls)
-Make Id primary key. Populate the table with only 5 records. Submit your CREATE and INSERT statements as Run queries & check DB.
+Insert the data from the example above and add primary keys and foreign keys. 
+Keep in mind that the table "StudentsExams" should have a composite primary key.
 
-# PROBLEM 8.Create Table Users
-Using SQL query create table Users with columns:
-• Id – unique number for every user. There will be no more than 263-1 users. (Auto incremented)
-• Username – unique identifier of the user will be no more than 30 characters (non Unicode). (Required)
-• Password – password will be no longer than 26 characters (non Unicode). (Required)
-• ProfilePicture – image with size up to 900 KB.
-• LastLoginTime
-• IsDeleted – shows if the user deleted his/her profile. Possible states are true or false.
-Make Id primary key. Populate the table with exactly 5 records. Submit your CREATE and INSERT statements as Run queries & check DB.
+# PROBLEM 4. Self-Referencing 
+Create one table and use appropriate data types.
+Example
+[Teachers]
+TeacherID  Name  ManagerID
+101       John      NULL
+102       Maya      106
+103      Silvia     106
+104       Ted       105
+105       Mark      101
+106      Greta      101
 
-# PROBLEM 9.Change Primary Key
-Using SQL queries modify table Users from the previous task. 
-First remove current primary key then create new primary key that would be the combination of fields Id and Username.
+Insert the data from the example above and add primary keys and foreign keys. 
+The foreign key should be between ManagerId and TeacherId.
 
-# PROBLEM 10.Add Check Constraint
-Using SQL queries modify table Users. 
-Add check constraint to ensure that the values in the Password field are at least 5 symbols long.
+# PROBLEM 5. Online Store Database
+Create a new database and design the following structure:
 
-# PROBLEM 11. 
-Set Default Value of a Field
-Using SQL queries modify table Users. 
-Make the default value of LastLoginTime field to be the current time.
+# PROBLEM 6.University Database
+Create a new database and design the following structure:
 
-# PROBLEM 12.Set Unique Field
-Using SQL queries modify table Users. Remove Username field from the primary key so only the field Id would be primary key. 
-Now add unique constraint to the Username field to ensure that the values there are at least 3 symbols long.
+# PROBLEM 7. SoftUni Design
+Create an E/R Diagram of the SoftUni Database. There are some special relations you should check out:
+    • Employees are self-referenced (ManagerID) 
+    • Departments have One-to-One with the Employees (ManagerID)
+    • Employees have One-to-Many (DepartmentID)
+You might find it interesting how it looks on the diagram. 
 
-# PROBLEM 13. Movies Database
-Using SQL queries create Movies database with the following entities:
-• Directors (Id, DirectorName, Notes)
-• Genres (Id, GenreName, Notes)
-• Categories (Id, CategoryName, Notes)
-• Movies (Id, Title, DirectorId, CopyrightYear, Length, GenreId, CategoryId, Rating, Notes)
-Set most appropriate data types for each column. Set primary key to each table. Populate each table with exactly 5 records. 
-Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields are always required and which are optional. 
-Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
+# PROBLEM 8. Geography Design
+Create an E/R Diagram of the Geography Database.
 
-# PROBLEM 14. Car Rental Database
-Using SQL queries create CarRental database with the following entities:
-• Categories (Id, CategoryName, DailyRate, WeeklyRate, MonthlyRate, WeekendRate)
-• Cars (Id, PlateNumber, Manufacturer, Model, CarYear, CategoryId, Doors, Picture, Condition, Available)
-• Employees (Id, FirstName, LastName, Title, Notes)
-• Customers (Id, DriverLicenceNumber, FullName, Address, City, ZIPCode, Notes)
-• RentalOrders (Id, EmployeeId, CustomerId, CarId, TankLevel, KilometrageStart, KilometrageEnd, TotalKilometrage, StartDate, EndDate, TotalDays, RateApplied, TaxRate, OrderStatus, Notes)
-Set most appropriate data types for each column. Set primary key to each table. Populate each table with only 3 records. Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields are always required and which are optional. Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
-
-# PROBLEM 15. Hotel Database
-Using SQL queries create Hotel database with the following entities:
-• Employees (Id, FirstName, LastName, Title, Notes)
-• Customers (AccountNumber, FirstName, LastName, PhoneNumber, EmergencyName, EmergencyNumber, Notes)
-• RoomStatus (RoomStatus, Notes)
-• RoomTypes (RoomType, Notes)
-• BedTypes (BedType, Notes)
-• Rooms (RoomNumber, RoomType, BedType, Rate, RoomStatus, Notes)
-• Payments (Id, EmployeeId, PaymentDate, AccountNumber, FirstDateOccupied, LastDateOccupied, TotalDays, AmountCharged, TaxRate, TaxAmount, PaymentTotal, Notes) 
-• Occupancies (Id, EmployeeId, DateOccupied, AccountNumber, RoomNumber, RateApplied, PhoneCharge, Notes)
-Set most appropriate data types for each column. Set primary key to each table. Populate each table with only 3 records. 
-Make sure the columns that are present in 2 tables would be of the same data type. Consider which fields are always required and which are optional. 
-Submit your CREATE TABLE and INSERT statements as Run queries & check DB.
-
-# PROBLEM 16. Create SoftUni Database
-Now create bigger database called SoftUni. You will use same database in the future tasks. It should hold information about
-• Towns (Id, Name)
-• Addresses (Id, AddressText, TownId)
-• Departments (Id, Name)
-• Employees (Id, FirstName, MiddleName, LastName, JobTitle, DepartmentId, HireDate, Salary, AddressId)
-Id columns are auto incremented starting from 1 and increased by 1 (1, 2, 3, 4…). 
-Make sure you use appropriate data types for each column. Add primary and foreign keys as constraints for each table. 
-Use only SQL queries. Consider which fields are always required and which are optional.
-
-# PROBLEM 17. Backup Database
-Backup the database SoftUni from the previous tasks into a file named “softuni-backup.bak”. 
-Delete your database from SQL Server Management Studio. 
-Then restore the database from the created backup.
-Hint: https://support.microsoft.com/en-gb/help/2019698/how-to-schedule-and-automate-backups-of-sql-server-databases-in-sql-se
-
-# PROBLEM 18. Basic Insert
-Use the SoftUni database and insert some data using SQL queries.
-• Towns: Sofia, Plovdiv, Varna, Burgas
-• Departments: Engineering, Sales, Marketing, Software Development, Quality Assurance
-• Employees:
-        Name               Job Title            Department         Hire Date       Salary
-Ivan Ivanov Ivanov      .NET Developer     Software Development    01/02/2013     3500.00
-Petar Petrov Petrov     Senior Engineer       Engineering          02/03/2004     4000.00
-Maria Petrova Ivanova   Intern              Quality Assurance      28/08/2016      525.25
-Georgi Teziev Ivanov    CEO                      Sales             09/12/2007     3000.00
-Peter Pan Pan           Intern                 Marketing           28/08/2016      599.88
-
-# PROBLEM 19. Basic Select All Fields
-Use the SoftUni database and first select all records from the Towns, then from Departments and finally from Employees table. 
-Use SQL queries and submit them to Judge at once. Submit your query statements as Prepare DB & Run queries.
-
-# PROBLEM 20. Basic Select All Fields and Order Them
-Modify queries from previous problem by sorting:
-• Towns - alphabetically by name
-• Departments - alphabetically by name
-• Employees - descending by salary
-Submit your query statements as Prepare DB & Run queries.
-
-# PROBLEM 21. Basic Select Some Fields
-Modify queries from previous problem to show only some of the columns. For table:
-• Towns – Name
-• Departments – Name
-• Employees – FirstName, LastName, JobTitle, Salary
-Keep the ordering from the previous problem. Submit your query statements as Prepare DB & Run queries.
-
-# PROBLEM 22. Increase Employees Salary
-Use SoftUni database and increase the salary of all employees by 10%. Then show only Salary column for all in the Employees table. 
-Submit your query statements as Prepare DB & Run queries.
-
-# PROBLEM 23. Decrease Tax Rate
-Use Hotel database and decrease tax rate by 3% to all payments. Then select only TaxRate column from the Payments table. 
-Submit your query statements as Prepare DB & Run queries.
-
-# PROBLEM 24. Delete All Records
-Use Hotel database and delete all records from the Occupancies table. Use SQL query. Submit your query statements as Run skeleton, run queries & check DB.
+# PROBLEM 9. *Peaks in Rila
+Display all peaks for "Rila" mountain. Include:
+    • MountainRange
+    • PeakName
+    • Elevation
+Peaks should be sorted by elevation descending.
+Example
+MountainRange  PeakName  Elevation
+Rila           Musala       2925
+…               …             …
